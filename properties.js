@@ -31,7 +31,12 @@ const properties = [
       "images/jc-hill-909-2.jpg",
       "images/jc-hill-909-3.jpg",
       "images/jc-hill-909-4.jpg",
-      "images/jc-hill-909-5.jpg"
+      "images/jc-hill-909-5.jpg",
+      "images/jc-hill-909-6.jpg",
+      "images/jc-hill-909-7.jpg",
+      "images/jc-hill-909-8.jpg",
+      "images/jc-hill-909-9.jpg",
+      "images/jc-hill-909-10.jpg"
     ],
     description: "Jed Yod area, renovated condo, convenient location near Nimman and MAYA.",
     map: "#",
