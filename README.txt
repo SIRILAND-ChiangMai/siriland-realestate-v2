@@ -1,0 +1,1 @@
+SIRILAND clean site. Upload html/css/js files first. Then upload images into images folder with exact names.
