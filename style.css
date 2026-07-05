@@ -86,3 +86,6 @@ footer{text-align:center;background:#07111f;color:#d8b25c;padding:28px}
   nav{gap:14px;flex-wrap:wrap;font-size:14px}
   .trust-bar,.filters,.grid,.finance,.contact-grid{grid-template-columns:1fr}
 }
+.hero-content{
+  display:none !important;
+}
