@@ -1,3 +1,4 @@
+console.log("PROPERTIES NEW VERSION LOADED");
 const properties = [
   {
     id: "CM-0001",
