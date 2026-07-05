@@ -5,18 +5,11 @@ const properties = [
     type: "Condo",
     deal: "Sale",
     price: "2.59 MB",
-    size: "36 sq.m.",
-    bedrooms: "1 Bedroom",
-    images: [
-      "images/wiangping-1110-1.jpg",
-      "images/wiangping-1110-2.jpg",
-      "images/wiangping-1110-3.jpg",
-      "images/wiangping-1110-4.jpg",
-      "images/wiangping-1110-5.jpg"
-    ],
     description: "Near MAYA only 200 m, 11th floor, renovated, foreign quota, Airbnb allowed.",
-    map: "https://maps.app.goo.gl/cHi4XGUstCAHv3uCA",
-    label: "CONDO"
+    bedrooms: "1 Bedroom",
+    bathrooms: "1 Bathroom",
+    area: "36 sq.m.",
+    images: ["images/wiang-ping-1110-1.jpg"]
   },
   {
     title: "JC Hill Place Room 909",
@@ -24,22 +17,10 @@ const properties = [
     type: "Condo",
     deal: "Sale",
     price: "2.39 MB",
-    size: "32.09 sq.m.",
-    bedrooms: "1 Bedroom",
-    images: [
-      "images/jc-hill-909-1.jpg",
-      "images/jc-hill-909-2.jpg",
-      "images/jc-hill-909-3.jpg",
-      "images/jc-hill-909-4.jpg",
-      "images/jc-hill-909-5.jpg",
-      "images/jc-hill-909-6.jpg",
-      "images/jc-hill-909-7.jpg",
-      "images/jc-hill-909-8.jpg",
-      "images/jc-hill-909-9.jpg",
-      "images/jc-hill-909-10.jpg"
-    ],
     description: "Jed Yod area, renovated condo, convenient location near Nimman and MAYA.",
-    map: "#",
-    label: "CONDO"
+    bedrooms: "1 Bedroom",
+    bathrooms: "1 Bathroom",
+    area: "32.09 sq.m.",
+    images: ["images/jc-hill-909-1.jpg","images/jc-hill-909-2.jpg","images/jc-hill-909-3.jpg","images/jc-hill-909-4.jpg","images/jc-hill-909-5.jpg","images/jc-hill-909-6.jpg","images/jc-hill-909-7.jpg","images/jc-hill-909-8.jpg","images/jc-hill-909-9.jpg","images/jc-hill-909-10.jpg"]
   }
 ];
