@@ -17,10 +17,10 @@ fillFilter(cityFilter, uniqueValues('city'));
 fillFilter(typeFilter, uniqueValues('type'));
 
 function cardTemplate(p, i){
-  const img = p.images && p.images[0] ? <img src="${p.images[0]}" alt="${p.title}"> : p.type;
+  const img = p.images && p.images[0] ? `<img src="${p.images[0]}" alt="${p.title}">` : p.type;
   const count = p.images ? p.images.length : 0;
   return `<article class="card" data-index="${i}">
-    <div class="photo">${img}<span class="badge">${p.deal} • ${p.type}</span>${count ? <span class="count">📷 ${count}</span> : ''}</div>
+    <div class="photo">${img}<span class="badge">${p.deal} • ${p.type}</span>${count ? `<span class="count">📷 ${count}</span>` : ''}</div>
     <div class="content">
       <div class="meta">${p.id || ''} • ${p.city} • ${p.type} • ${p.deal}</div>
       <h3>${p.title}</h3>
