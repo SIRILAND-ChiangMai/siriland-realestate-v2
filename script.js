@@ -1,1 +1,62 @@
-let galleryImages=[];let galleryIndex=0;function getImages(p){if(Array.isArray(p.images)&&p.images.length)return p.images;if(p.image)return[p.image];return[]}function renderProperties(){const city=document.getElementById('cityFilter').value,type=document.getElementById('typeFilter').value,deal=document.getElementById('dealFilter').value,search=document.getElementById('searchInput').value.toLowerCase(),grid=document.getElementById('propertyGrid');const filtered=properties.filter(p=>(city==='all'||p.city===city)&&(type==='all'||p.type===type)&&(deal==='all'||p.deal===deal)&&((p.title||'').toLowerCase().includes(search)||(p.description||'').toLowerCase().includes(search)));grid.innerHTML=filtered.map(p=>{const idx=properties.indexOf(p),imgs=getImages(p);const photo=imgs.length?`<img src="${imgs[0]}" alt="${p.title}" onerror="this.parentElement.innerHTML='${p.label||p.type}'"><span class="badge">📸 ${imgs.length}</span>`:`${p.label||p.type}`;return `<article class="card"><div class="photo" onclick="openGallery(${idx})">${photo}</div><div class="content"><div class="meta">${p.city} • ${p.type} • ${p.deal}</div><h3>${p.title}</h3><div class="price">${p.price}</div><p>${p.description}</p><div class="chips"><span>${p.size}</span><span>${p.bedrooms}</span></div><div class="actions"><a class="smallbtn goldbtn" href="${p.map}" target="_blank">Google Maps</a><a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a></div></div></article>`}).join('')}function openGallery(i){galleryImages=getImages(properties[i]);if(!galleryImages.length)return;galleryIndex=0;updateGallery();document.getElementById('gallery').classList.remove('hidden')}function closeGallery(){document.getElementById('gallery').classList.add('hidden')}function updateGallery(){document.getElementById('galleryImg').src=galleryImages[galleryIndex];document.getElementById('counter').textContent=`${galleryIndex+1} / ${galleryImages.length}`}function nextImage(){if(!galleryImages.length)return;galleryIndex=(galleryIndex+1)%galleryImages.length;updateGallery()}function prevImage(){if(!galleryImages.length)return;galleryIndex=(galleryIndex-1+galleryImages.length)%galleryImages.length;updateGallery()}document.addEventListener('DOMContentLoaded',()=>{['cityFilter','typeFilter','dealFilter','searchInput'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('input',renderProperties)});renderProperties()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeGallery();if(e.key==='ArrowRight')nextImage();if(e.key==='ArrowLeft')prevImage()});
+const grid = document.getElementById('propertyGrid');
+const cityFilter = document.getElementById('cityFilter');
+const typeFilter = document.getElementById('typeFilter');
+const dealFilter = document.getElementById('dealFilter');
+const searchInput = document.getElementById('searchInput');
+const modal = document.getElementById('propertyModal');
+const modalClose = document.getElementById('modalClose');
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+
+function uniqueValues(key){return [...new Set(properties.map(p => p[key]).filter(Boolean))];}
+function fillFilter(select, values){values.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;select.appendChild(o);});}
+fillFilter(cityFilter, uniqueValues('city'));
+fillFilter(typeFilter, uniqueValues('type'));
+
+function cardTemplate(p, i){
+  const img = p.images && p.images[0] ? `<img src="${p.images[0]}" alt="${p.title}">` : p.type;
+  const count = p.images ? p.images.length : 0;
+  return `<article class="card" data-index="${i}">
+    <div class="photo">${img}<span class="badge">${p.deal} • ${p.type}</span>${count ? `<span class="count">📷 ${count}</span>` : ''}</div>
+    <div class="content">
+      <div class="meta">${p.city} • ${p.type} • ${p.deal}</div>
+      <h3>${p.title}</h3>
+      <div class="price">${p.price}</div>
+      <p class="desc">${p.description}</p>
+      <div class="chips"><span>${p.bedrooms || '-'}</span><span>${p.bathrooms || '-'}</span><span>${p.area || '-'}</span></div>
+      <div class="actions"><a class="smallbtn goldbtn" href="tel:0920056640">Call</a><a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a></div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const q = searchInput.value.toLowerCase();
+  const filtered = properties.filter(p =>
+    (cityFilter.value==='all'||p.city===cityFilter.value) &&
+    (typeFilter.value==='all'||p.type===typeFilter.value) &&
+    (dealFilter.value==='all'||p.deal===dealFilter.value) &&
+    (`${p.title} ${p.city} ${p.type} ${p.description}`.toLowerCase().includes(q))
+  );
+  grid.innerHTML = filtered.map((p)=>cardTemplate(p, properties.indexOf(p))).join('') || '<p>No properties found.</p>';
+}
+
+function openModal(p){
+  document.getElementById('modalImg').src = p.images?.[0] || '';
+  document.getElementById('modalMeta').textContent = `${p.city} • ${p.type} • ${p.deal}`;
+  document.getElementById('modalTitle').textContent = p.title;
+  document.getElementById('modalPrice').textContent = p.price;
+  document.getElementById('modalDesc').textContent = p.description;
+  document.getElementById('modalChips').innerHTML = `<span>${p.bedrooms || '-'}</span><span>${p.bathrooms || '-'}</span><span>${p.area || '-'}</span>`;
+  modal.classList.remove('hidden');
+}
+
+grid.addEventListener('click', e=>{
+  const card = e.target.closest('.card');
+  if(!card || e.target.closest('a')) return;
+  openModal(properties[Number(card.dataset.index)]);
+});
+modalClose.addEventListener('click',()=>modal.classList.add('hidden'));
+modal.addEventListener('click', e=>{if(e.target===modal) modal.classList.add('hidden')});
+[cityFilter,typeFilter,dealFilter,searchInput].forEach(el=>el.addEventListener('input',render));
+menuToggle.addEventListener('click',()=>mainNav.classList.toggle('show'));
+render();
