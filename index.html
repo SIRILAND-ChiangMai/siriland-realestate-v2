@@ -1,17 +1,126 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>SIRILAND Real Estate Thailand</title><link rel="stylesheet" href="style.css"></head><body>
-<header>
-  <div class="brand">
-    <div class="logo">
-      <img src="images/logo.png" alt="SIRILAND Logo">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIRILAND Real Estate Thailand</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home">
+      <img src="images/logo.png" alt="SIRILAND Logo" class="brand-logo" />
+      <div>
+        <h1>SIRILAND</h1>
+        <p>Real Estate Thailand</p>
+      </div>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <nav id="mainNav">
+      <a href="#properties">Properties</a>
+      <a href="#finance">Owner Finance</a>
+      <a href="#contact">Contact</a>
+      <a class="nav-line" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="eyebrow">Luxury Real Estate Thailand</span>
+      <h2>Buy, Rent & Invest in Thailand Property</h2>
+      <p>Condos, houses, land and commercial properties in Chiang Mai, Phichit, Phitsanulok, Bangkok and more.</p>
+      <div class="hero-actions">
+        <a href="#properties" class="btn primary">View Listings</a>
+        <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank" class="btn outline">LINE Official</a>
+      </div>
     </div>
-    <div>
-      <h1>SIRILAND</h1>
-      <p>Real Estate Thailand</p>
+  </section>
+
+  <section class="trust-bar">
+    <div><strong>Trusted & Professional</strong><span>Your trusted partner in real estate</span></div>
+    <div><strong>Owner Finance Available</strong><span>Flexible payment options</span></div>
+    <div><strong>Prime Locations</strong><span>Chiang Mai, Phichit, Phitsanulok, Bangkok</span></div>
+    <div><strong>Full Support</strong><span>We are here to help you</span></div>
+  </section>
+
+  <main>
+    <section class="section" id="properties">
+      <div class="section-head">
+        <span class="eyebrow dark">Featured Listings</span>
+        <h2>Properties for Sale & Rent</h2>
+      </div>
+
+      <div class="filters">
+        <select id="cityFilter"><option value="all">All Cities</option></select>
+        <select id="typeFilter"><option value="all">All Types</option></select>
+        <select id="dealFilter">
+          <option value="all">Sale & Rent</option>
+          <option value="Sale">Sale</option>
+          <option value="Rent">Rent</option>
+        </select>
+        <input id="searchInput" type="search" placeholder="Search property..." />
+      </div>
+
+      <div class="grid" id="propertyGrid"></div>
+    </section>
+
+    <section class="finance" id="finance">
+      <div>
+        <span class="eyebrow">Owner Finance</span>
+        <h2>Flexible payment options for selected properties</h2>
+        <p>Selected SIRILAND properties may offer owner finance, flexible down payment, or special buyer conditions.</p>
+        <a href="#contact" class="btn primary">Ask For Details</a>
+      </div>
+      <div class="finance-card">
+        <h3>Why SIRILAND?</h3>
+        <ul>
+          <li>Selected properties in prime locations</li>
+          <li>Professional support for buyers and tenants</li>
+          <li>Thai, English, Turkish and Chinese service</li>
+          <li>Contact via LINE, WhatsApp or phone</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="section-head left-head">
+        <span class="eyebrow dark">Contact</span>
+        <h2>Talk to SIRILAND</h2>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-card" href="tel:0920056640"><strong>092-005-6640</strong><span>Call / WhatsApp</span></a>
+        <a class="contact-card" href="tel:0906507558"><strong>090-650-7558</strong><span>Call / WhatsApp</span></a>
+        <a class="contact-card" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank"><strong>@realcreamthailand</strong><span>LINE Official</span></a>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="propertyModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">×</button>
+      <img id="modalImg" src="" alt="Property photo" />
+      <div class="modal-body">
+        <p id="modalMeta" class="meta"></p>
+        <h3 id="modalTitle"></h3>
+        <div id="modalPrice" class="price"></div>
+        <p id="modalDesc"></p>
+        <div id="modalChips" class="chips"></div>
+        <div class="actions">
+          <a class="smallbtn goldbtn" href="tel:0920056640">Call</a>
+          <a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
+        </div>
+      </div>
     </div>
-  </div></p></div></div><nav><a href="#properties">Properties</a><a href="#finance">Owner Finance</a><a href="#contact">Contact</a></nav></header>
-<section class="hero"><div><p class="gold">Luxury Real Estate Thailand</p><h2>Buy, Rent & Invest in Thailand Property</h2><p>Condos, houses, land and commercial properties in Chiang Mai, Phichit, Phitsanulok, Bangkok and more.</p><a class="btn" href="#properties">View Listings</a><a class="btn ghost" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a></div></section>
-<section id="properties" class="section"><p class="gold center">Featured Listings</p><h2 class="title">Properties for Sale & Rent</h2><div class="filters"><select id="cityFilter"><option value="all">All Cities</option><option value="Chiang Mai">Chiang Mai</option><option value="Phichit">Phichit</option><option value="Phitsanulok">Phitsanulok</option><option value="Bangkok">Bangkok</option></select><select id="typeFilter"><option value="all">All Types</option><option value="Condo">Condo</option><option value="House">House</option><option value="Land">Land</option><option value="Commercial">Commercial</option></select><select id="dealFilter"><option value="all">Sale & Rent</option><option value="Sale">Sale</option><option value="Rent">Rent</option></select><input id="searchInput" placeholder="Search property..."></div><div id="propertyGrid" class="grid"></div></section>
-<section id="finance" class="finance"><div><p class="gold">Owner Financing</p><h2>Own Property More Easily</h2><p>Selected listings support direct installment plans with the owner.</p></div><div class="finance-card"><h3>Common Conditions</h3><p>Down payment from 10%</p><p>0% interest on selected listings</p><p>Flexible monthly installments</p></div></section>
-<section id="contact" class="section contact"><div><p class="gold">Contact</p><h2>Talk to Kwan</h2><p>For buying, selling, renting, investing or property consultation.</p></div><div class="contact-card"><a href="tel:+66920056640">☎️ 092-005-6640</a><a href="tel:+66906507558">☎️ 090-650-7558</a><a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">💬 LINE: @realcreamthailand</a></div></section>
-<div id="gallery" class="gallery hidden"><button class="close" onclick="closeGallery()">×</button><button class="arrow left" onclick="prevImage()">‹</button><img id="galleryImg" src=""><button class="arrow right" onclick="nextImage()">›</button><div id="counter"></div></div>
-<footer>© 2026 SIRILAND Real Estate Thailand</footer><script src="properties.js"></script><script src="script.js"></script></body></html>
+  </div>
+
+  <footer>
+    <p>© SIRILAND Real Estate Thailand</p>
+  </footer>
+
+  <script src="properties.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
