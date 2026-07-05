@@ -11,11 +11,18 @@ const properties = [
     bathrooms: "1 Bathroom",
     area: "36 sq.m.",
     description: "Near MAYA only 200 m, 11th floor, renovated, foreign quota, Airbnb allowed, free transfer.",
-    images: [
-      "images/wiang-ping-1110-1.jpg",
-      "images/wiang-ping-1110-2.jpg",
-      "images/wiang-ping-1110-3.jpg"
-    ]
+   images: [
+  "images/wiangping-1.jpg",
+  "images/wiangping-2.jpg",
+  "images/wiangping-3.jpg",
+  "images/wiangping-4.jpg",
+  "images/wiangping-5.jpg",
+  "images/wiangping-6.jpg",
+  "images/wiangping-7.jpg",
+  "images/wiangping-8.jpg",
+  "images/wiangping-9.jpg",
+  "images/wiangping-10.jpg"
+]
   },
   {
     id: "CM-0002",
