@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIRILAND Admin Panel</title>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f2e9;color:#071a33}
+    header{background:#07111f;color:white;padding:22px 6%;border-bottom:3px solid #d8b25c}
+    header h1{margin:0;font-size:30px;letter-spacing:1px}
+    header p{margin:4px 0 0;color:#d8b25c}
+    main{max-width:1180px;margin:auto;padding:30px 20px 80px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .card{background:white;border-radius:20px;padding:24px;box-shadow:0 16px 45px rgba(7,17,31,.1)}
+    label{display:block;font-weight:800;margin-top:12px}
+    input,select,textarea{width:100%;padding:13px;border:1px solid #d8cab9;border-radius:12px;font-size:15px;margin-top:6px}
+    textarea{min-height:110px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    button{border:0;border-radius:12px;padding:14px 18px;font-weight:900;cursor:pointer}
+    .primary{background:#d8b25c;color:#07111f}
+    .dark{background:#07111f;color:#fff}
+    .ghost{background:#f3eadc;color:#07111f}
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .preview{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}
+    .preview img{width:100%;height:90px;object-fit:cover;border-radius:10px}
+    pre{background:#07111f;color:#d8b25c;border-radius:14px;padding:16px;white-space:pre-wrap;max-height:520px;overflow:auto}
+    .small{font-size:13px;color:#5b6675}
+    .ok{background:#e9f7ef;border:1px solid #b7e3c8;color:#145a32;padding:12px;border-radius:12px;margin-top:12px;display:none}
+    .warn{background:#fff3cd;border:1px solid #ffe08a;color:#6b4e00;padding:12px;border-radius:12px;margin-top:12px}
+    @media(max-width:900px){.grid,.row{grid-template-columns:1fr}.preview{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>SIRILAND Admin Panel</h1>
+  <p>Yeni ilan ekle • Fotoğrafları otomatik isimlendir • properties.js oluştur</p>
+</header>
+<main>
+  <div class="warn">Bu panel GitHub'a otomatik yükleme yapmaz. Sana yeni <b>properties.js</b> ve yeniden isimlendirilmiş fotoğraf ZIP'i üretir.</div>
+  <div class="grid">
+    <section class="card">
+      <h2>1) Mevcut properties.js yükle</h2>
+      <input type="file" id="propertiesFile" accept=".js,.txt">
+      <div id="loadOk" class="ok">properties.js yüklendi.</div>
+
+      <h2>2) Yeni ilan bilgileri</h2>
+      <div class="row"><div><label>ID</label><input id="id" placeholder="CM-0022"></div><div><label>Başlık</label><input id="title" placeholder="Karnkanok Ville 12 House"></div></div>
+      <div class="row"><div><label>Şehir</label><input id="city" value="Chiang Mai"></div><div><label>Tip</label><select id="type"><option>Condo</option><option>House</option><option>Land</option><option>Commercial</option></select></div></div>
+      <div class="row"><div><label>Deal</label><select id="deal"><option>Sale</option><option>Rent</option><option>Sale & Rent</option></select></div><div><label>Status</label><select id="status"><option>Available</option><option>Reserved</option><option>Sold Out</option><option>Rented</option></select></div></div>
+      <div class="row"><div><label>Fiyat</label><input id="price" placeholder="36,000 THB/month veya 6.9 MB"></div><div><label>Alan</label><input id="area" placeholder="220 sq.m. / 52 sq.w."></div></div>
+      <div class="row"><div><label>Yatak Odası</label><input id="bedrooms" placeholder="4 Bedrooms"></div><div><label>Banyo</label><input id="bathrooms" placeholder="4 Bathrooms"></div></div>
+      <div class="row"><div><label>Oda / Unit</label><input id="room" placeholder="Room 909 / Soi 4"></div><div><label>Kat / Floor</label><input id="floor" placeholder="9th Floor"></div></div>
+      <label>Google Maps Link</label><input id="map" placeholder="https://maps.app.goo.gl/...">
+      <label>Kısa Açıklama</label><textarea id="description" placeholder="Fully furnished, near international schools, no pets..."></textarea>
+      <label>Highlights / Rozetler</label><input id="highlights" placeholder="Foreign Quota, Airbnb Allowed, Owner Finance, Pool Villa">
+      <label>Fotoğraflar</label><input type="file" id="images" accept="image/*" multiple>
+      <p class="small">Fotoğraflar başlığa göre slug-1.jpg, slug-2.jpg şeklinde yeniden isimlenir.</p>
+      <div class="preview" id="preview"></div>
+      <div class="actions">
+        <button class="primary" id="generateBtn">İlanı oluştur</button>
+        <button class="dark" id="downloadZipBtn">ZIP indir</button>
+        <button class="ghost" id="copyBtn">properties.js kopyala</button>
+      </div>
+      <div id="doneOk" class="ok">Hazırlandı.</div>
+    </section>
+    <section class="card">
+      <h2>Çıktı</h2>
+      <pre id="output">Önce mevcut properties.js yükle, sonra ilan bilgilerini doldur.</pre>
+    </section>
+  </div>
+</main>
+<script>
+let properties = [];
+let selectedImages = [];
+let generatedZip = null;
+let generatedCode = "";
+
+function slugify(text){
+  return String(text || "property").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"").slice(0,80) || "property";
+}
+function readPropertiesText(txt){
+  const cleaned = txt.replace(/^\s*const\s+properties\s*=\s*/, "").replace(/;\s*$/, "");
+  return Function('"use strict"; return (' + cleaned + ')')();
+}
+document.getElementById("propertiesFile").addEventListener("change", async e=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const txt = await file.text();
+  try{
+    properties = readPropertiesText(txt);
+    document.getElementById("loadOk").style.display="block";
+    document.getElementById("output").textContent = "Yüklendi: " + properties.length + " ilan.";
+  }catch(err){ alert("properties.js okunamadı: " + err.message); }
+});
+document.getElementById("images").addEventListener("change", e=>{
+  selectedImages = Array.from(e.target.files || []);
+  const preview = document.getElementById("preview");
+  preview.innerHTML = "";
+  selectedImages.slice(0,20).forEach(file=>{
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+});
+function collectProperty(){
+  const title = document.getElementById("title").value.trim();
+  const slug = slugify(title);
+  const imagePaths = selectedImages.map((_,i)=>`images/${slug}-${i+1}.jpg`);
+  const highlights = document.getElementById("highlights").value.split(",").map(x=>x.trim()).filter(Boolean);
+  return {
+    id: document.getElementById("id").value.trim(),
+    title,
+    city: document.getElementById("city").value.trim(),
+    type: document.getElementById("type").value,
+    deal: document.getElementById("deal").value,
+    status: document.getElementById("status").value,
+    price: document.getElementById("price").value.trim(),
+    bedrooms: document.getElementById("bedrooms").value.trim(),
+    bathrooms: document.getElementById("bathrooms").value.trim(),
+    area: document.getElementById("area").value.trim(),
+    room: document.getElementById("room").value.trim(),
+    floor: document.getElementById("floor").value.trim(),
+    map: document.getElementById("map").value.trim(),
+    description: document.getElementById("description").value.trim(),
+    highlights,
+    images: imagePaths
+  };
+}
+function makePropertiesCode(arr){ return "const properties = " + JSON.stringify(arr, null, 2) + ";"; }
+async function build(){
+  const p = collectProperty();
+  if(!p.id || !p.title){ alert("ID ve Başlık zorunlu."); return; }
+  const next = properties.filter(x=>x.id !== p.id);
+  next.push(p);
+  generatedCode = makePropertiesCode(next);
+  document.getElementById("output").textContent = generatedCode;
+  const zip = new JSZip();
+  zip.file("properties.js", generatedCode);
+  const folder = zip.folder("images");
+  const slug = slugify(p.title);
+  for(let i=0;i<selectedImages.length;i++){
+    const file = selectedImages[i];
+    const data = await file.arrayBuffer();
+    folder.file(`${slug}-${i+1}.jpg`, data);
+  }
+  generatedZip = await zip.generateAsync({type:"blob"});
+  document.getElementById("doneOk").style.display="block";
+}
+document.getElementById("generateBtn").addEventListener("click", build);
+document.getElementById("downloadZipBtn").addEventListener("click", async ()=>{
+  if(!generatedZip) await build();
+  if(!generatedZip) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(generatedZip);
+  a.download = "siriland-new-property.zip";
+  a.click();
+});
+document.getElementById("copyBtn").addEventListener("click", async ()=>{
+  if(!generatedCode) await build();
+  await navigator.clipboard.writeText(generatedCode);
+  alert("properties.js kopyalandı.");
+});
+</script>
+</body>
+</html>
