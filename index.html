@@ -4,20 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SIRILAND Real Estate Thailand</title>
+  <meta name="description" content="Luxury real estate in Thailand. Buy, rent and invest in Chiang Mai property with SIRILAND." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#home">
       <img src="images/logo.png" alt="SIRILAND Logo" class="brand-logo" />
-      <div>
-        <h1>SIRILAND</h1>
-        <p>Real Estate Thailand</p>
-      </div>
+      <div><h1>SIRILAND</h1><p>Real Estate Thailand</p></div>
     </a>
-
-    <button class="menu-toggle" id="menuToggle">☰</button>
-
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
     <nav id="mainNav">
       <a href="#properties">Properties</a>
       <a href="#finance">Owner Finance</a>
@@ -30,8 +26,8 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <span class="eyebrow">Luxury Real Estate Thailand</span>
-      <h2>Buy, Rent & Invest in Thailand Property</h2>
-      <p>Condos, houses, land and commercial properties in Chiang Mai, Phichit, Phitsanulok, Bangkok and more.</p>
+      <h2>Buy, Rent & Invest in Chiang Mai Property</h2>
+      <p>Premium condos, houses and investment properties with photo galleries, maps and direct contact.</p>
       <div class="hero-actions">
         <a href="#properties" class="btn primary">View Listings</a>
         <a href="https://line.me/R/ti/p/@realcreamthailand" target="_blank" class="btn outline">LINE Official</a>
@@ -39,11 +35,11 @@
     </div>
   </section>
 
-   <section class="trust-bar">
-    <div><strong>Trusted & Professional</strong><span>Your trusted partner in real estate</span></div>
-    <div><strong>Owner Finance Available</strong><span>Flexible payment options</span></div>
-    <div><strong>Prime Locations</strong><span>Chiang Mai, Phichit, Phitsanulok, Bangkok</span></div>
-    <div><strong>Full Support</strong><span>We are here to help you</span></div>
+  <section class="trust-bar">
+    <div><strong id="propertyCount">0+</strong><span>Properties</span></div>
+    <div><strong>Chiang Mai</strong><span>Prime Locations</span></div>
+    <div><strong>Owner Finance</strong><span>Selected deals</span></div>
+    <div><strong>4 Languages</strong><span>TH / EN / TR / 中文</span></div>
   </section>
 
   <main>
@@ -52,44 +48,22 @@
         <span class="eyebrow dark">Featured Listings</span>
         <h2>Properties for Sale & Rent</h2>
       </div>
-
       <div class="filters">
         <select id="cityFilter"><option value="all">All Cities</option></select>
         <select id="typeFilter"><option value="all">All Types</option></select>
-        <select id="dealFilter">
-          <option value="all">Sale & Rent</option>
-          <option value="Sale">Sale</option>
-          <option value="Rent">Rent</option>
-        </select>
-        <input id="searchInput" type="search" placeholder="Search property..." />
+        <select id="dealFilter"><option value="all">Sale & Rent</option></select>
+        <input id="searchInput" type="search" placeholder="Search ID, project, room, area..." />
       </div>
-
       <div class="grid" id="propertyGrid"></div>
     </section>
 
     <section class="finance" id="finance">
-      <div>
-        <span class="eyebrow">Owner Finance</span>
-        <h2>Flexible payment options for selected properties</h2>
-        <p>Selected SIRILAND properties may offer owner finance, flexible down payment, or special buyer conditions.</p>
-        <a href="#contact" class="btn primary">Ask For Details</a>
-      </div>
-      <div class="finance-card">
-        <h3>Why SIRILAND?</h3>
-        <ul>
-          <li>Selected properties in prime locations</li>
-          <li>Professional support for buyers and tenants</li>
-          <li>Thai, English, Turkish and Chinese service</li>
-          <li>Contact via LINE, WhatsApp or phone</li>
-        </ul>
-      </div>
+      <div><span class="eyebrow">Owner Finance</span><h2>Flexible payment options for selected properties</h2><p>Ask us about owner finance, foreign quota, Airbnb allowed units and special buyer conditions.</p><a href="#contact" class="btn primary">Ask For Details</a></div>
+      <div class="finance-card"><h3>Why SIRILAND?</h3><ul><li>Curated investment properties</li><li>Clear ID system for every listing</li><li>Map links and photo galleries</li><li>Thai, English, Turkish and Chinese support</li></ul></div>
     </section>
 
     <section class="section contact" id="contact">
-      <div class="section-head left-head">
-        <span class="eyebrow dark">Contact</span>
-        <h2>Talk to SIRILAND</h2>
-      </div>
+      <div class="section-head left-head"><span class="eyebrow dark">Contact</span><h2>Talk to SIRILAND</h2></div>
       <div class="contact-grid">
         <a class="contact-card" href="tel:0920056640"><strong>092-005-6640</strong><span>Call / WhatsApp</span></a>
         <a class="contact-card" href="tel:0906507558"><strong>090-650-7558</strong><span>Call / WhatsApp</span></a>
@@ -101,28 +75,30 @@
   <div class="modal hidden" id="propertyModal">
     <div class="modal-card">
       <button class="modal-close" id="modalClose">×</button>
-      <img id="modalImg" src="" alt="Property photo" />
-      <button id="modalPrev" class="modal-arrow modal-prev">‹</button>
-<button id="modalNext" class="modal-arrow modal-next">›</button>
-<div id="modalCounter" class="modal-counter">1 / 1</div>
+      <div class="modal-gallery">
+        <img id="modalImg" src="" alt="Property photo" />
+        <button id="modalPrev" class="modal-arrow modal-prev">‹</button>
+        <button id="modalNext" class="modal-arrow modal-next">›</button>
+        <div id="modalCounter" class="modal-counter">1 / 1</div>
+      </div>
       <div class="modal-body">
         <p id="modalMeta" class="meta"></p>
         <h3 id="modalTitle"></h3>
         <div id="modalPrice" class="price"></div>
         <p id="modalDesc"></p>
         <div id="modalChips" class="chips"></div>
-        <div class="actions">
+        <div id="modalThumbs" class="thumbs"></div>
+        <div class="actions modal-actions">
           <a class="smallbtn goldbtn" href="tel:0920056640">Call</a>
           <a class="smallbtn" href="https://line.me/R/ti/p/@realcreamthailand" target="_blank">LINE</a>
+          <a class="smallbtn" id="modalMap" target="_blank">Map</a>
+          <button class="smallbtn" id="copyLink">Copy Link</button>
         </div>
       </div>
     </div>
   </div>
 
-  <footer>
-    <p>© SIRILAND Real Estate Thailand</p>
-  </footer>
-
+  <footer><p>© SIRILAND Real Estate Thailand</p></footer>
   <script src="properties.js"></script>
   <script src="script.js"></script>
 </body>
