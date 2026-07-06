@@ -636,7 +636,6 @@ const properties = [
       "Unit 3609"
     ],
     "images": [
-      "images/the-next-1-1.jpg",
      "images/the-next-1-26.jpg",
       "images/the-next-1-27.jpg",
       "images/the-next-1-28.jpg",
