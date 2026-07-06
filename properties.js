@@ -35,10 +35,28 @@ const properties = [
     bathrooms: "1 Bathroom",
     area: "32.09 sq.m.",
     description: "Jed Yod location, foreign quota, renovated, suitable for living or investment.",
-    images: [
-      "images/jc-hill-909-1.jpg",
-      "images/jc-hill-909-2.jpg",
-      "images/jc-hill-909-3.jpg"
+   images: [
+"images/hillside3-1.jpg",
+"images/hillside3-2.jpg",
+"images/hillside3-3.jpg",
+"images/hillside3-4.jpg",
+"images/hillside3-5.jpg",
+"images/hillside3-6.jpg",
+"images/hillside3-7.jpg",
+"images/hillside3-8.jpg",
+"images/hillside3-9.jpg",
+"images/hillside3-10.jpg",
+"images/hillside3-11.jpg",
+"images/hillside3-12.jpg",
+"images/hillside3-13.jpg",
+"images/hillside3-14.jpg",
+"images/hillside3-15.jpg",
+"images/hillside3-16.jpg",
+"images/hillside3-17.jpg",
+"images/hillside3-18.jpg",
+"images/hillside3-19.jpg",
+"images/hillside3-20.jpg"
+
     ]
   },
   {
