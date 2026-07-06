@@ -201,3 +201,20 @@ if (location.hash) {
   const p = properties.find(x => x.id === id);
   if (p) setTimeout(() => openModal(p), 200);
 }
+
+// Clickable top statistic cards
+document.querySelectorAll("[data-trust-city]").forEach(el=>{
+  el.addEventListener("click",()=>{
+    const city = el.getAttribute("data-trust-city");
+    if(cityFilter){ cityFilter.value = city; render(); }
+  });
+});
+document.querySelectorAll("[data-trust-action='properties']").forEach(el=>{
+  el.addEventListener("click",()=>{
+    if(cityFilter) cityFilter.value = 'all';
+    if(typeFilter) typeFilter.value = 'all';
+    if(dealFilter) dealFilter.value = 'all';
+    if(searchInput) searchInput.value = '';
+    render();
+  });
+});

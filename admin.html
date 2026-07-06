@@ -165,7 +165,7 @@ const $ = id => document.getElementById(id);
 function slugify(text){
   return String(text || "property")
     .toLowerCase()
-    .normalize("NFD").replace(/[\\u0300-\\u036f]/g,"")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
     .replace(/[^a-z0-9]+/g,"-")
     .replace(/^-+|-+$/g,"")
     .slice(0,80) || "property";
@@ -173,8 +173,8 @@ function slugify(text){
 
 function readPropertiesText(txt){
   const cleaned = txt
-    .replace(/^\\s*const\\s+properties\\s*=\\s*/,"")
-    .replace(/;\\s*$/,"");
+    .replace(/^\s*const\s+properties\s*=\s*/,"")
+    .replace(/;\s*$/,"");
   return Function('"use strict"; return (' + cleaned + ')')();
 }
 
@@ -249,15 +249,15 @@ $("extractBtn").onclick = () => {
   const link = getVal("fbLink");
 
   const price =
-    pick(/(?:price|ราคา|ขาย|เช่า|฿)\\s*[:：]?\\s*([0-9,.]+\\s*(?:MB|M|ล้าน|บาท|THB|฿)?(?:\\s*\\/\\s*month)?)/i,t) ||
-    pick(/([0-9,.]+\\s*(?:MB|ล้าน|THB\\/month|บาท\\/เดือน|บาท))/i,t);
+    pick(/(?:price|ราคา|ขาย|เช่า|฿)\s*[:：]?\s*([0-9,.]+\s*(?:MB|M|ล้าน|บาท|THB|฿)?(?:\s*\/\s*month)?)/i,t) ||
+    pick(/([0-9,.]+\s*(?:MB|ล้าน|THB\/month|บาท\/เดือน|บาท))/i,t);
 
-  const area = pick(/([0-9,.]+\\s*(?:sq\\.?m\\.?|sqm|ตร\\.ม\\.|ตารางเมตร|sq\\.w\\.?|ตร\\.ว\\.))/i,t);
-  const bed = pick(/([0-9]+\\s*(?:bedrooms?|bed room|br|นอน|ห้องนอน))/i,t);
-  const bath = pick(/([0-9]+\\s*(?:bathrooms?|bath room|ba|น้ำ|ห้องน้ำ))/i,t);
-  const floor = pick(/([0-9]+(?:st|nd|rd|th)?\\s*(?:floor|ชั้น))/i,t);
-  const room = pick(/(?:room|unit|ห้อง)\\s*([A-Za-z0-9\\-\\/]+)/i,t);
-  const map = pick(/(https?:\\/\\/(?:maps\\.app\\.goo\\.gl|goo\\.gl\\/maps|www\\.google\\.com\\/maps)[^\\s]+)/i,t);
+  const area = pick(/([0-9,.]+\s*(?:sq\.?m\.?|sqm|ตร\.ม\.|ตารางเมตร|sq\.w\.?|ตร\.ว\.))/i,t);
+  const bed = pick(/([0-9]+\s*(?:bedrooms?|bed room|br|นอน|ห้องนอน))/i,t);
+  const bath = pick(/([0-9]+\s*(?:bathrooms?|bath room|ba|น้ำ|ห้องน้ำ))/i,t);
+  const floor = pick(/([0-9]+(?:st|nd|rd|th)?\s*(?:floor|ชั้น))/i,t);
+  const room = pick(/(?:room|unit|ห้อง)\s*([A-Za-z0-9\-\/]+)/i,t);
+  const map = pick(/(https?:\/\/(?:maps\.app\.goo\.gl|goo\.gl\/maps|www\.google\.com\/maps)[^\s]+)/i,t);
 
   const title =
     t.split(/\\n/)
@@ -398,7 +398,7 @@ async function buildZip(){
   const folder = zip.folder("images");
 
   for(const [path,file] of Object.entries(imageFilesByPath)){
-    folder.file(path.replace(/^images\\//,""), await file.arrayBuffer());
+    folder.file(path.replace(/^images\//,""), await file.arrayBuffer());
   }
 
   return await zip.generateAsync({type:"blob"});
