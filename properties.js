@@ -637,7 +637,7 @@ const properties = [
     ],
     "images": [
       "images/the-next-1-1.jpg",
-     "images/the-next-1-26.jpg",
+      "images/the-next-1-26.jpg",
       "images/the-next-1-27.jpg",
       "images/the-next-1-28.jpg",
       "images/the-next-1-29.jpg",
@@ -915,6 +915,53 @@ const properties = [
       "images/wiang-ping-mansion-condo-1110-22.jpg",
       "images/wiang-ping-mansion-condo-1110-23.jpg",
       "images/wiang-ping-mansion-condo-1110-24.jpg"
+    ]
+  },
+  {
+    "id": "PIL-001",
+    "title": "PILLOK HOME 3 Bedroom House",
+    "titles": {
+      "en": "PILLOK HOME 3 Bedroom House",
+      "th": "บ้านเดี่ยว PILLOK HOME 3 ห้องนอน",
+      "tr": "PILLOK HOME 3 Yatak Odalı Ev",
+      "zh": "PILLOK HOME 三卧独栋住宅"
+    },
+    "city": "Phitsanulok",
+    "type": "House",
+    "deal": "Sale",
+    "status": "Available",
+    "price": "6.9MB",
+    "bedrooms": "3 Bedrooms",
+    "bathrooms": "3 Bathrooms",
+    "area": "97.6 ตร.ว.",
+    "room": "",
+    "floor": "",
+    "map": "",
+    "description": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+    "descriptions": {
+      "en": "3-bedroom house in Phitsanulok, 97.6 sq.w., sale price 6.9 MB. Owner finance available: 10% down payment, 25,000 THB/month, 0% interest up to 60 months. Comfortable atmosphere, ready to move in.",
+      "th": "บ้านเดี่ยวในตัวเมืองพิษณุโลก 3 ห้องนอน 3 ห้องน้ำ ที่ดิน 97.6 ตร.ว. ราคาขาย 6.9 ล้านบาท มีเงื่อนไขผ่อนตรงกับเจ้าของ ดาวน์ 10% ผ่อน 25,000 บาท/เดือน ดอกเบี้ย 0% สูงสุด 60 งวด บรรยากาศดี พร้อมเข้าอยู่",
+      "tr": "Phitsanulok’ta 3 yatak odalı, 3 banyolu müstakil ev. Arsa 97.6 sq.w., satış fiyatı 6.9 MB. Sahibinden ödeme imkânı: %10 peşinat, ayda 25.000 THB, 60 aya kadar %0 faiz. Ferah ve taşınmaya hazır.",
+      "zh": "位于彭世洛的三卧三卫独栋住宅，土地面积 97.6 平方哇，售价 690 万泰铢。可业主分期：首付 10%，每月 25,000 泰铢，最长 60 期 0% 利息。环境舒适，可入住。"
+    },
+    "highlights": [
+      "Owner Finance",
+      "0% Interest up to 60 months",
+      "3 Bedrooms",
+      "3 Bathrooms",
+      "97.6 sq.w."
+    ],
+    "images": [
+      "images/pil-001-1.jpg",
+      "images/pil-001-2.jpg",
+      "images/pil-001-3.jpg",
+      "images/pil-001-4.jpg",
+      "images/pil-001-5.jpg",
+      "images/pil-001-6.jpg",
+      "images/pil-001-7.jpg",
+      "images/pil-001-8.jpg",
+      "images/pil-001-9.jpg",
+      "images/pil-001-10.jpg"
     ]
   }
 ];
